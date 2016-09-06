@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # testflight_invite.py
 #
@@ -189,25 +189,26 @@ def main():
         return -1 
 
     itcLogin = sys.argv[1]
+    itcPassword = sys.argv[2]
 
     try:
-        appId = int(sys.argv[2])
+        appId = int(sys.argv[3])
     except Exception as e:
         print 'Invalid App ID'
         usage()
         sys.exit(-1)
 
-    email = sys.argv[3]
-    firstName = sys.argv[4] if len(sys.argv) > 4 else ''
-    lastName = sys.argv[5] if len(sys.argv) > 5 else ''
+    email = sys.argv[4]
+    firstName = sys.argv[5] if len(sys.argv) > 5 else ''
+    lastName = sys.argv[6] if len(sys.argv) > 6 else ''
 
-    try:
-        itcPassword = getpass('iTunes Connect Password: ')
-        assert len(itcPassword)
-    except:
-        print '\nFailed to get iTunes Connect password. Aborting...'
-        usage()
-        return -1
+    #try:
+    #    itcPassword = getpass('iTunes Connect Password: ')
+    #    assert len(itcPassword)
+    #except:
+    #    print '\nFailed to get iTunes Connect password. Aborting...'
+    #    usage()
+    #    return -1
 
     try:
         invite = TestFlightInvite(itcLogin, itcPassword, appId)
